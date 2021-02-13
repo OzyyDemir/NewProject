@@ -40,7 +40,8 @@ namespace DataAccess.Concrete.InMemorry
         }
 
         public List<Product> GetAllByCategory(int categoryId)
-        {
+        {//Linq -> Language Integreted Query,Dile gömülü sorgu
+
             return _products.Where(p => p.CategoryId == categoryId).ToList();
         }
 
