@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Abstract
-{
-    public interface IEntityRepository<T> where T:class,IEntity
+{//Generic Repository                          //Generic Constraint-kısıt
+    public interface IEntityRepository<T> where T:class,IEntity,new()//new oluşumu olabilsin.
     {
         List<T> GetAll(Expression<Func<T,bool>>  filter=null);  
 

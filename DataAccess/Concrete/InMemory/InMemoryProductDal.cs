@@ -10,16 +10,15 @@ namespace DataAccess.Concrete.InMemorry
 {
     public class InMemoryProductDal : IProductDal
     {
-
-        List<Product> _products;
+        readonly List<Product> _products;
 
         public InMemoryProductDal()
         {
             _products = new List<Product>() { 
-            new Product{ProductId=1,CategoryId=1,ProductName="Bardak",UnicPrice=15,UnitysInStock=15},
-            new Product{ProductId=2,CategoryId=2,ProductName="dak",UnicPrice=15,UnitysInStock=15},
-            new Product{ProductId=3,CategoryId=3,ProductName="rdak",UnicPrice=15,UnitysInStock=15},
-            new Product{ProductId=4,CategoryId=4,ProductName="ardak",UnicPrice=15,UnitysInStock=15}
+            new Product{ProductId=1,CategoryId=1,ProductName="Bardak",UnitPrice=15,UnitsInStock=15},
+            new Product{ProductId=2,CategoryId=2,ProductName="dak",UnitPrice=15,UnitsInStock=15},
+            new Product{ProductId=3,CategoryId=3,ProductName="rdak",UnitPrice=15,UnitsInStock=15},
+            new Product{ProductId=4,CategoryId=4,ProductName="ardak",UnitPrice=15,UnitsInStock=15}
 
             }; 
         }
@@ -61,8 +60,8 @@ namespace DataAccess.Concrete.InMemorry
             Product productToUpdate= _products.SingleOrDefault(p => p.ProductId == product.ProductId);
 
             productToUpdate.ProductName = product.ProductName;
-            productToUpdate.UnicPrice = product.UnicPrice;
-            productToUpdate.UnitysInStock = product.UnitysInStock;
+            productToUpdate.UnitPrice = product.UnitPrice;
+            productToUpdate.UnitsInStock = product.UnitsInStock;
             productToUpdate.CategoryId = product.CategoryId;
 
 
