@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,11 @@ namespace DataAccess.Concrete.InMemorry
         {//Linq -> Language Integreted Query,Dile gömülü sorgu
 
             return _products.Where(p => p.CategoryId == categoryId).ToList();
+        }
+
+        public List<ProductDetailDto> GetPtoductDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Product product)
