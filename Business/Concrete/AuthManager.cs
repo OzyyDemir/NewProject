@@ -11,6 +11,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+
     public class AuthManager : IAuthService
     {
         private IUserService _userService;
@@ -36,7 +37,7 @@ namespace Business.Concrete
                 Status = true
             };
             _userService.Add(user);
-            return new SuccessDataResult<User>(user, "Kayıt oldu.");
+            return new SuccessDataResult<User>(user, "Kayıt oldu");
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
@@ -44,15 +45,15 @@ namespace Business.Concrete
             var userToCheck = _userService.GetByMail(userForLoginDto.Email);
             if (userToCheck == null)
             {
-                return new ErrorDataResult<User>("Kayıt bulunamadı.");
+                return new ErrorDataResult<User>("Kullanıcı bulunamadı");
             }
 
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
             {
-                return new ErrorDataResult<User>("Parola hatası.");
+                return new ErrorDataResult<User>("Parola hatası");
             }
 
-            return new SuccessDataResult<User>(userToCheck,"Başarılı giriş");
+            return new SuccessDataResult<User>(userToCheck, "Başarılı giriş");
         }
 
         public IResult UserExists(string email)
@@ -68,7 +69,7 @@ namespace Business.Concrete
         {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims);
-            return new SuccessDataResult<AccessToken>(accessToken, "Token oluşturuldu.");
+            return new SuccessDataResult<AccessToken>(accessToken, "Token oluşturuldu");
         }
     }
 }
