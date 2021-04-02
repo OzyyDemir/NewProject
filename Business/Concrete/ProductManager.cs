@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspect.Autofac;
-using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -25,6 +24,8 @@ namespace Business.Concrete
     {
          IProductDal _productDal;
         ICategoryService _categoryService;
+
+
         public ProductManager(IProductDal productDal,ICategoryService categoryService)
         {
             _productDal = productDal;
@@ -32,12 +33,13 @@ namespace Business.Concrete
         }
 
 
-        //[SecuredOperation("product.add,admin")]
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
-          IResult result =  BusinessRules.Run(CheckIfProductNameExist(product.ProductName),
+          IResult result =  BusinessRules.Run(
+                CheckIfProductNameExists(product.ProductName),
                 CheckIfProductCountOfCategoryCorrect(product.CategoryId),
                 CheckIfCategoryLimitExceded());
             if(result != null)
@@ -106,7 +108,7 @@ namespace Business.Concrete
             return new SuccessResult();
 
         }
-        private IResult CheckIfProductNameExist(string productName)
+        private IResult CheckIfProductNameExists(string productName)
         {
             var result = _productDal.GetAll(p => p.ProductName==productName).Any();
             if (result)
