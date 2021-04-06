@@ -20,7 +20,7 @@ namespace Core.Utilities.Security.JWT
 
         public JwtHelper(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration;  
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         }
